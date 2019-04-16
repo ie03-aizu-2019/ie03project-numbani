@@ -1,8 +1,6 @@
-# Progress Report : Week
+# Progress Report : Week 01
 
-# 01
-
-# Team:¡¡Numbani
+# Team: Numbani
 
 #
 
@@ -41,10 +39,14 @@ environment as a local repository from remote repository. So:
 Finally, we need push a readme.md with commit. So we commit &quot;first commit&quot; and pushed the master branch.
 
 I also cloned the project to my PC in eclipse, using Egit. Just following the tutorial was ok.
-#
-#
-#
-s1242004 Wang Zidu£º
+
+
+
+
+
+
+
+s1242004 Wang Zidu:
 
 First, made our team with s1242002, Tang Zigiang, and decide the team name as Numbani.
 
