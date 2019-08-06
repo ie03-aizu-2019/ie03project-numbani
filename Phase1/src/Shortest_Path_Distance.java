@@ -10,7 +10,6 @@ public class Shortest_Path_Distance {
 	private static int INF = Integer.MAX_VALUE;
 
 	public static void main(String[] args) {
-
 		list = new ArrayList<double[]>();
 		Scanner sc = new Scanner(System.in);
 
@@ -69,7 +68,7 @@ public class Shortest_Path_Distance {
 			f = sc.nextLine();
 			String[] tmp = getPoints(f, points);
 			double dnmd = spd.reslove(matrix, (Integer.parseInt(tmp[0]) - 1), (Integer.parseInt(tmp[1]) - 1));
-			if(dnmd != INF)System.out.println(String.format("%.5f",dnmd));
+			if(dnmd != INF)System.out.println(String.format("\n%.5f",dnmd));
 		}
 		// close sc
 		sc.close();
@@ -85,7 +84,8 @@ public class Shortest_Path_Distance {
 		boolean[] isVisited = new boolean[adjMat.length];
 		// 用于存储从s到各个点之间的最短路径长度
 		double[] d = new double[adjMat.length];
-
+		int[] pre = new int[adjMat.length];
+		for(int i = 0; i < pre.length; i++) pre[i] = i;
 		// 初始化数据
 		for (int i = 0; i < adjMat.length; i++) {
 			isVisited[i] = false;
@@ -116,12 +116,30 @@ public class Shortest_Path_Distance {
 			for (int i = 0; i < adjMat.length; i++) {
 				if (d[index] + adjMat[index][i] < d[i]) {
 					d[i] = d[index] + adjMat[index][i];
+					pre[i] = index; 
 				}
 			}
 			unVisitedNum--;
 			isVisited[index] = true;
 		}
+		printPath(t,s,pre);
 		return d[t];
+	}
+	
+	void printPath(int v, int s, int[] pre) {
+	    if(v == s) {
+	    	printtt(v);
+	        return ;
+	    }
+	    printPath(pre[v], s, pre);
+	    printtt(v);
+	}
+	
+	void printtt(int x) {
+		if (x+1>n) {
+			System.out.print("C"+(x-n+1)+" ");
+		}	
+		else System.out.print(x+1+" ");
 	}
 
 	public static boolean nottheendpoint(double[] Inters, Segment1[] segs) {
@@ -167,13 +185,14 @@ public class Shortest_Path_Distance {
 					jc[cnt] = new Jcpoint(cnt, i, j);
 					cnt++;
 					matrix[n + cnt - 1][segs[i].pid] = getDistance(Intersection, segs[i].p);
-					matrix[segs[i].pid][n + counter - 1] = getDistance(Intersection, segs[i].p);
+					matrix[segs[i].pid][n + cnt - 1] = getDistance(Intersection, segs[i].p);
 					matrix[n + cnt - 1][segs[i].qid] = getDistance(Intersection, segs[i].q);
-					matrix[segs[i].qid][n + counter - 1] = getDistance(Intersection, segs[i].q);
+					matrix[segs[i].qid][n + cnt - 1] = getDistance(Intersection, segs[i].q);
 					matrix[n + cnt - 1][segs[j].pid] = getDistance(Intersection, segs[j].p);
-					matrix[segs[j].pid][n + counter - 1] = getDistance(Intersection, segs[j].p);
+					matrix[segs[j].pid][n + cnt - 1] = getDistance(Intersection, segs[j].p);
 					matrix[n + cnt - 1][segs[j].qid] = getDistance(Intersection, segs[j].q);
-					matrix[segs[j].qid][n + counter - 1] = getDistance(Intersection, segs[j].q);
+					matrix[segs[j].qid][n + cnt - 1] = getDistance(Intersection, segs[j].q);
+		
 				} else {
 					// System.out.println("NA");
 				}

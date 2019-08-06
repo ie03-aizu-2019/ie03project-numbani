@@ -4,7 +4,7 @@ import java.util.*;
 public class Detection_of_intersection {
 	protected static final double EPS = 1.0e-8;
 	static int i = 0;
-	
+	static int counter=0;
 	public static void main(String[] args) {
 		
 		int n, m, p, q;		
@@ -55,11 +55,13 @@ public class Detection_of_intersection {
 				Intersection = getIntersection(segs[i],segs[j]);
 				if(Intersection[0]!=-1 &&Intersection[1]!=-1) {
 					System.out.printf("%.5f %.5f\n",Intersection[0],Intersection[1]);
+					counter++;
 				}else{
 			        System.out.println("NA");
 		        }				
 			}
 		}
+		 System.out.println("The number of the intersections is: "+ counter);
 	}
 	
 	public static double[] getIntersection(Segment a, Segment b) {

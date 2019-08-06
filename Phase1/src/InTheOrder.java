@@ -40,7 +40,7 @@ public class InTheOrder{
 	    //close sc
 	    sc.close();
 
-	    
+	  
 	    detect(segs);
 	    
 	}
@@ -71,6 +71,7 @@ public class InTheOrder{
 			System.out.printf("%.5f %.5f\n",i[0],i[1]);
 		}
 		//System.out.printf("%.5f %.5f\n",Intersection[0],Intersection[1]);
+		  System.out.println("The number of the intersections is: "+ list.size());
 	}
 	
 	public static double[] getIntersection(Segment a, Segment b) {
