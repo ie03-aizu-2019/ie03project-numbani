@@ -56,7 +56,7 @@ public class Shortest_Path_Distance {
 
 		jcpoints = changethematrix(segs, matrix, jcpoints);
 		InsToMatrix(jcpoints, matrix);
-		
+
 		Shortest_Path_Distance spd = new Shortest_Path_Distance();
 
 		// input the start point and the end point
@@ -67,8 +67,13 @@ public class Shortest_Path_Distance {
 		for (i = 0; i < q; i++) {
 			f = sc.nextLine();
 			String[] tmp = getPoints(f, points);
-			double dnmd = spd.reslove(matrix, (Integer.parseInt(tmp[0]) - 1), (Integer.parseInt(tmp[1]) - 1));
-			if(dnmd != INF)System.out.println(String.format("\n%.5f",dnmd));
+			if (tmp[0] == tmp[1])
+				System.out.println("It is 0\n");
+			else {
+				double dnmd = spd.reslove(matrix, (Integer.parseInt(tmp[0]) - 1), (Integer.parseInt(tmp[1]) - 1));
+				if (dnmd != INF)
+					System.out.println(String.format("\n%.5f", dnmd));
+			}
 		}
 		// close sc
 		sc.close();
@@ -85,7 +90,8 @@ public class Shortest_Path_Distance {
 		// 用于存储从s到各个点之间的最短路径长度
 		double[] d = new double[adjMat.length];
 		int[] pre = new int[adjMat.length];
-		for(int i = 0; i < pre.length; i++) pre[i] = i;
+		for (int i = 0; i < pre.length; i++)
+			pre[i] = i;
 		// 初始化数据
 		for (int i = 0; i < adjMat.length; i++) {
 			isVisited[i] = false;
@@ -107,39 +113,36 @@ public class Shortest_Path_Distance {
 				}
 			}
 			/*
-			if(index == t || unVisitedNum == 0) {
-				System.out.print(index); //打印最短路径
-			} else {
-				System.out.print(index + "=>"); //打印最短路径
-			}
-			*/
+			 * if(index == t || unVisitedNum == 0) { System.out.print(index); //打印最短路径 }
+			 * else { System.out.print(index + "=>"); //打印最短路径 }
+			 */
 			for (int i = 0; i < adjMat.length; i++) {
 				if (d[index] + adjMat[index][i] < d[i]) {
 					d[i] = d[index] + adjMat[index][i];
-					pre[i] = index; 
+					pre[i] = index;
 				}
 			}
 			unVisitedNum--;
 			isVisited[index] = true;
 		}
-		printPath(t,s,pre);
+		printPath(t, s, pre);
 		return d[t];
 	}
-	
+
 	void printPath(int v, int s, int[] pre) {
-	    if(v == s) {
-	    	printtt(v);
-	        return ;
-	    }
-	    printPath(pre[v], s, pre);
-	    printtt(v);
+		if (v == s) {
+			printtt(v);
+			return;
+		}
+		printPath(pre[v], s, pre);
+		printtt(v);
 	}
-	
+
 	void printtt(int x) {
-		if (x+1>n) {
-			System.out.print("C"+(x-n+1)+" ");
-		}	
-		else System.out.print(x+1+" ");
+		if (x + 1 > n) {
+			System.out.print("C" + (x - n + 1) + " ");
+		} else
+			System.out.print(x + 1 + " ");
 	}
 
 	public static boolean nottheendpoint(double[] Inters, Segment1[] segs) {
@@ -170,8 +173,9 @@ public class Shortest_Path_Distance {
 		}
 		if (counter == 0)
 			System.out.println("No intersection");
-		else {}
-			Collections.sort(list, new myComparator());
+		else {
+		}
+		Collections.sort(list, new myComparator());
 	}
 
 	public static Jcpoint[] changethematrix(Segment1[] segs, double[][] matrix, Jcpoint[] jcpoints) {
@@ -192,7 +196,7 @@ public class Shortest_Path_Distance {
 					matrix[segs[j].pid][n + cnt - 1] = getDistance(Intersection, segs[j].p);
 					matrix[n + cnt - 1][segs[j].qid] = getDistance(Intersection, segs[j].q);
 					matrix[segs[j].qid][n + cnt - 1] = getDistance(Intersection, segs[j].q);
-		
+
 				} else {
 					// System.out.println("NA");
 				}
